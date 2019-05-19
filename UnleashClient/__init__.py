@@ -13,21 +13,21 @@ from .utils import LOGGER
 
 
 # pylint: disable=dangerous-default-value
-class UnleashClient():
+class UnleashClient(object):
     """
     Client implementation.
     """
     def __init__(self,
-                 url: str,
-                 app_name: str,
-                 instance_id: str = "unleash-client-python",
-                 refresh_interval: int = 15,
-                 metrics_interval: int = 60,
-                 disable_metrics: bool = False,
-                 disable_registration: bool = False,
-                 custom_headers: dict = {},
-                 custom_strategies: dict = {},
-                 cache_directory: str = None) -> None:
+                 url,
+                 app_name,
+                 instance_id="unleash-client-python",
+                 refresh_interval=15,
+                 metrics_interval=60,
+                 disable_metrics=False,
+                 disable_registration=False,
+                 custom_headers={},
+                 custom_strategies={},
+                 cache_directory= None):
         """
         A client for the Unleash feature toggle system.
 
@@ -71,12 +71,13 @@ class UnleashClient():
             "userWithId": UserWithId
         }
 
-        self.strategy_mapping = {**custom_strategies, **default_strategy_mapping}
+        self.strategy_mapping = default_strategy_mapping.copy()
+        self.strategy_mapping.update(custom_strategies)
 
         # Client status
         self.is_initialized = False
 
-    def initialize_client(self) -> None:
+    def initialize_client(self):
         """
         Initializes client and starts communication with central unleash server(s).
 
@@ -143,9 +144,9 @@ class UnleashClient():
 
     # pylint: disable=broad-except
     def is_enabled(self,
-                   feature_name: str,
-                   context: dict = {},
-                   default_value: bool = False) -> bool:
+                   feature_name,
+                   context={},
+                   default_value=False):
         """
         Checks if a feature toggle is enabled.
 

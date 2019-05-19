@@ -6,12 +6,12 @@ from UnleashClient.utils import LOGGER
 
 
 # pylint: disable=broad-except
-def register_client(url: str,
-                    app_name: str,
-                    instance_id: str,
-                    metrics_interval: int,
-                    custom_headers: dict,
-                    supported_strategies: dict) -> bool:
+def register_client(url,
+                    app_name,
+                    instance_id,
+                    metrics_interval,
+                    custom_headers,
+                    supported_strategies):
     """
     Attempts to register client with unleash server.
 
@@ -27,11 +27,12 @@ def register_client(url: str,
     :param supported_strategies:
     :return: true if registration successful, false if registration unsuccessful or exception.
     """
+    supported_strategies = supported_strategies.copy()
     registation_request = {
         "appName": app_name,
         "instanceId": instance_id,
         "sdkVersion": "{}:{}".format(SDK_NAME, SDK_VERSION),
-        "strategies": [*supported_strategies],
+        "strategies": supported_strategies,
         "started": datetime.now(timezone.utc).isoformat(),
         "interval": metrics_interval
     }

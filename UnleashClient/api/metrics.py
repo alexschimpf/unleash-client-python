@@ -5,9 +5,9 @@ from UnleashClient.utils import LOGGER
 
 
 # pylint: disable=broad-except
-def send_metrics(url: str,
-                 request_body: dict,
-                 custom_headers: dict) -> bool:
+def send_metrics(url,
+                 request_body,
+                 custom_headers):
     """
     Attempts to send metrics to Unleash server
 
@@ -25,9 +25,12 @@ def send_metrics(url: str,
         LOGGER.info("Sending messages to with unleash @ %s", url)
         LOGGER.info("unleash metrics information: %s", request_body)
 
+        headers = APPLICATION_HEADERS.copy()
+        headers.update(custom_headers)
+
         resp = requests.post(url + METRICS_URL,
                              data=json.dumps(request_body),
-                             headers={**custom_headers, **APPLICATION_HEADERS},
+                             headers=headers,
                              timeout=REQUEST_TIMEOUT)
 
         if resp.status_code != 202:

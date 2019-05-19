@@ -2,7 +2,7 @@ from UnleashClient.strategies import Strategy
 
 
 class Default(Strategy):
-    def __call__(self, context: dict = None) -> bool:
+    def __call__(self, context=None):
         """
         Return true if enabled.
 

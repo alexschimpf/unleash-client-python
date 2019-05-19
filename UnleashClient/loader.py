@@ -4,8 +4,8 @@ from UnleashClient.constants import FEATURES_URL
 from UnleashClient.utils import LOGGER
 
 # pylint: disable=broad-except
-def _create_strategies(provisioning: dict,
-                       strategy_mapping: dict) -> list:
+def _create_strategies(provisioning,
+                       strategy_mapping):
     feature_strategies = []
 
     for strategy in provisioning["strategies"]:
@@ -21,8 +21,8 @@ def _create_strategies(provisioning: dict,
     return feature_strategies
 
 
-def _create_feature(provisioning: dict,
-                    strategy_mapping: dict) -> Feature:
+def _create_feature(provisioning,
+                    strategy_mapping):
     if "strategies" in provisioning.keys():
         parsed_strategies = _create_strategies(provisioning, strategy_mapping)
     else:
@@ -33,9 +33,9 @@ def _create_feature(provisioning: dict,
                    strategies=parsed_strategies)
 
 
-def load_features(cache: FileCache,
-                  feature_toggles: dict,
-                  strategy_mapping: dict) -> None:
+def load_features(cache,
+                  feature_toggles,
+                  strategy_mapping):
     """
     Caching
 

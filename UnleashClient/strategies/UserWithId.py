@@ -2,10 +2,10 @@ from UnleashClient.strategies import Strategy
 
 
 class UserWithId(Strategy):
-    def load_provisioning(self) -> list:
+    def load_provisioning(self):
         return [x.strip() for x in self.parameters["userIds"].split(',')]
 
-    def __call__(self, context: dict = None) -> bool:
+    def __call__(self, context=None):
         """
         Returns true if userId is a member of id list.
 

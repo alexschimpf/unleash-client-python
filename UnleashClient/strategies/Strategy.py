@@ -6,7 +6,7 @@ class Strategy():
     * load_provisioning - Loads strategy provisioning
     """
     def __init__(self,
-                 parameters: dict = {}) -> None:
+                 parameters={}):
         """
         A generic strategy objects.
 
@@ -19,7 +19,7 @@ class Strategy():
         self.parsed_provisioning = self.load_provisioning()
 
     # pylint: disable=no-self-use
-    def load_provisioning(self) -> list:
+    def load_provisioning(self):
         """
         Method to load data on object initialization, if desired.
 
@@ -30,7 +30,7 @@ class Strategy():
     def __eq__(self, other):
         return self.parameters == other.parameters
 
-    def __call__(self, context: dict = None) -> bool:
+    def __call__(self, context=None):
         """
         Strategy implementation goes here.
 
