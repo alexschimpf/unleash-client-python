@@ -41,9 +41,12 @@ def register_client(url,
         LOGGER.info("Registering unleash client with unleash @ %s", url)
         LOGGER.info("Registration request information: %s", registation_request)
 
+        headers = APPLICATION_HEADERS.copy()
+        headers.update(custom_headers)
+
         resp = requests.post(url + REGISTER_URL,
                              data=json.dumps(registation_request),
-                             headers={**custom_headers, **APPLICATION_HEADERS},
+                             headers=headers,
                              timeout=REQUEST_TIMEOUT)
 
         if resp.status_code != 202:

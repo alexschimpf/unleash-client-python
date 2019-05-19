@@ -32,7 +32,7 @@ class Feature:
         self.yes_count = 0
         self.no_count = 0
 
-    def increment_stats(self, result: bool):
+    def increment_stats(self, result):
         """
         Increments stats.
 
